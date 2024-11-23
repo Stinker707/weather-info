@@ -5,7 +5,6 @@ const apiKey = 'e6051476c5664333a9f172047242011';
 const form = document.querySelector('#form');
 const input = document.querySelector('#inputCity');
 const header = document.querySelector('.header')
-const img = document.querySelector('#img');
 
 async function getWeather(city) {
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
@@ -27,18 +26,35 @@ function showError(errorMessage) {
     header.insertAdjacentHTML('afterend', html);
 }
 
-function showCard ({name, country, temp, condition, imgPath}) {
+function showCard({name, country, temp, condition, imgPath}) {
+    const htmlImg = imgPath ? `<img class="card-img" src="${imgPath}" alt=""></img>` : ''
     const html = `<div class="card">
                         <h2 class="card-city">${name} <span>${country}</span></h2>
 
                         <div class="card-weather">
                             <div class="card-value">${temp}<sup>°c</sup></div>
-                            <div><img class="card-img" id="img" src="${imgPath}" alt=""></div>
+                            <div>${htmlImg}</div>
                             </div class="card-description">${condition}</div>
                         </div>
                     </div>`
 
     header.insertAdjacentHTML('afterend', html);
+}
+
+async function checkImgSrc(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        
+        img.onload = () => {
+            resolve(true);  // Изображение загружено успешно
+        };
+        
+        img.onerror = () => {
+            resolve(false);  // Ошибка при загрузке изображения
+        };
+        
+        img.src = url;
+    });
 }
 
 form.onsubmit = async function (e) {
@@ -62,9 +78,13 @@ form.onsubmit = async function (e) {
         const filePath = './img/' + (data.current.is_day ? 'day' : 'night') + '/';
         const fileName = (data.current.is_day ? info.day : info.night) + '.png';
 
-        let imgPath = filePath + fileName;
+        const localImgPath = filePath + fileName;
 
-        const condition = data.current.is_day ? info.languages[23] ['day_text'] : info.languages[23] ['night_text'];
+        const remoteImgPath = data.current.condition.icon;
+
+        let imgPath = await checkImgSrc(localImgPath) ? localImgPath : (await checkImgSrc(remoteImgPath) ? remoteImgPath : '')
+        
+        const condition = data.current.is_day ? info.languages[23]['day_text'] : info.languages[23]['night_text']; // 23 индекс русского языка
 
         const weatherData = {
             name: data.location.name,
