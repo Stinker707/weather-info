@@ -1,0 +1,150 @@
+@import "./reset.css";
+
+@import url(https://fonts.googleapis.com/css?family=Rubik:300,regular,500,700);
+
+body {
+    font-family: Rubik;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 50px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    row-gap: 20px;
+    padding: 40px 15px 50px;
+    background: linear-gradient(92.7deg, #4cb8c4 0%, #3cd3ad 100%), #232323;
+
+}
+
+.title {
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1.18;
+    color: #fff;
+
+}
+
+.form {
+    display: flex;
+    width: 460px;
+    height: 54px;
+    background: #fff;
+    border-radius: 6px;
+}
+
+.input {
+    flex-grow: 1;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1;
+    color: #000;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.input:focus {
+    outline-width: 0;
+}
+
+.btn {
+    width: 145px;
+    height: 54px;
+    border-radius: 6px;
+    background-color: #ED3052;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+
+    transition: background-color 0.2s ease-in;
+
+}
+
+.btn:hover {
+    background-color: #f01039;
+}
+
+/* Cards */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    position: relative;
+    padding: 30px;
+    min-width: 360px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
+}
+
+.card-img {
+    width: 126px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    bottom: -10px;
+    z-index: -1;
+    width: calc(100% - 20px);
+    height: 100%;
+
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
+}
+
+.card-weather {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-city {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.18;
+    color: #000;
+}
+
+.card-city span {
+    display: inline-block;
+    vertical-align: top;
+    padding: 3px 5px;
+    /* width: 27px; */
+    height: 18px;
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1;
+    color: #fff;
+
+    background-color: #E5464F;
+    border-radius: 6px;
+}
+
+.card-value {
+    font-size: 92px;
+    line-height: 1;
+    color: #000;
+}
+
+.card-value sup {
+    font-size: 50%;
+}
+
+.card-description {
+    font-size: 20px;
+    line-height: 1.2;
+}
