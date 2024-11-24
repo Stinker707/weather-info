@@ -45,6 +45,8 @@ async function checkImgSrc(url) {
 form.onsubmit = async function (e) {
     e.preventDefault(); //отмена отправки формы
 
+    card.classList.add('hidden');
+
     let city = input.value.trim();  //trim обрезает пробелы и табы в конце и в начале
 
     const data = await getWeather(city);
@@ -77,4 +79,5 @@ form.onsubmit = async function (e) {
 
         showCard(weatherData);
     }
+    card.classList.remove('hidden');
 }
