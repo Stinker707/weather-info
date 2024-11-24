@@ -8,7 +8,7 @@ const input = document.querySelector('#inputCity');
 const card = document.querySelector('#card');
 
 async function getWeather(city) {
-    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&lang=ru`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
@@ -16,7 +16,7 @@ async function getWeather(city) {
 
 function showCard({name, country, temp, condition, imgPath}) {
     const htmlImg = imgPath ? `<img class="card-img" src="${imgPath}" alt=""></img>` : ''
-    const html = `<h2 class="card-city">${name} <span>${country}</span></h2>
+    const html = `<h2><span class="card-city">${name}</span><span class="card-country">${country}</span></h2>
         <div class="card-weather">
             <div class="card-value">${temp}<sup>°c</sup></div>
             <div>${htmlImg}</div>
@@ -47,7 +47,7 @@ form.onsubmit = async function (e) {
 
     card.classList.add('hidden');
 
-    let city = input.value.trim();  //trim обрезает пробелы и табы в конце и в начале
+    const city = input.value.trim();  //trim обрезает пробелы и табы в конце и в начале
 
     const data = await getWeather(city);
 
@@ -64,17 +64,14 @@ form.onsubmit = async function (e) {
 
         const remoteImgPath = data.current.condition.icon;
 
-        let imgPath = await checkImgSrc(localImgPath) ? localImgPath : (await checkImgSrc(remoteImgPath) ? remoteImgPath : '')
-        
-        const condition = data.current.is_day ? info.languages[23]['day_text'] : info.languages[23]['night_text']; // 23 индекс русского языка
-
+        const imgPath = await checkImgSrc(localImgPath) ? localImgPath : (await checkImgSrc(remoteImgPath) ? remoteImgPath : '')
+        const temp = Math.round(data.current.temp_c);
         const weatherData = {
             name: data.location.name,
             country: data.location.country,
-            temp: data.current.temp_c,
-            condition: condition,
-            imgPath: imgPath,
-
+            temp,
+            condition: data.current.condition.text,
+            imgPath,
         };
 
         showCard(weatherData);
