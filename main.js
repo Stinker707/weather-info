@@ -50,9 +50,7 @@ form.onsubmit = async function (e) {
     const data = await getWeather(city);
 
     if(data.error) {
-        const errorMessage = error.find((obj) => obj.code === data.error.code).text
-
-        card.innerText = errorMessage;
+        card.innerText = error[data.error.code];
     } else {
 
         const info = conditions.find((obj) => obj.code === data.current.condition.code)
