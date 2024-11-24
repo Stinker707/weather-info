@@ -13,12 +13,6 @@ async function getWeather(city) {
     return data;
 }
 
-function showError(errorMessage) {
-    const html = `${errorMessage}`;
-    console.log(card)
-    card.innerHTML = html;
-}
-
 function showCard({name, country, temp, condition, imgPath}) {
     const htmlImg = imgPath ? `<img class="card-img" src="${imgPath}" alt=""></img>` : ''
     const html = `<h2 class="card-city">${name} <span>${country}</span></h2>
@@ -55,7 +49,7 @@ form.onsubmit = async function (e) {
     const data = await getWeather(city);
 
     if(data.error) {
-        showError(data.error.message);
+        card.innerText = data.error.message;
     } else {
         const info = conditions.find((obj) => obj.code === data.current.condition.code)
         
