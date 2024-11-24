@@ -1,4 +1,5 @@
 import conditions from './condition.js';
+import error from './error.js';
 
 
 const apiKey = 'e6051476c5664333a9f172047242011';
@@ -49,8 +50,11 @@ form.onsubmit = async function (e) {
     const data = await getWeather(city);
 
     if(data.error) {
-        card.innerText = data.error.message;
+        const errorMessage = error.find((obj) => obj.code === data.error.code).text
+
+        card.innerText = errorMessage;
     } else {
+
         const info = conditions.find((obj) => obj.code === data.current.condition.code)
         
         const filePath = './img/' + (data.current.is_day ? 'day' : 'night') + '/';
