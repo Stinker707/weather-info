@@ -4,15 +4,17 @@ import conditions from './condition.js';
 const apiKey = 'e6051476c5664333a9f172047242011';
 const form = document.querySelector('#form');
 const input = document.querySelector('#inputCity');
-const header = document.querySelector('.header')
+const main = document.querySelector('main')
 
 async function getWeather(city) {
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
+    console.log(data.error);
     return data;
 }
+
 
 function removeCard() {
     const prevCard = document.querySelector('.card');
@@ -23,7 +25,7 @@ function removeCard() {
 
 function showError(errorMessage) {
     const html = `<div class="card">${errorMessage}</div>`;
-    header.insertAdjacentHTML('afterend', html);
+    main.innerHTML = html;
 }
 
 function showCard({name, country, temp, condition, imgPath}) {
@@ -38,7 +40,7 @@ function showCard({name, country, temp, condition, imgPath}) {
                         </div>
                     </div>`
 
-    header.insertAdjacentHTML('afterend', html);
+    main.innerHTML = html;
 }
 
 async function checkImgSrc(url) {
