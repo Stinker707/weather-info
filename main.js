@@ -1,7 +1,6 @@
 import conditions from './condition.js';
 import error from './error.js';
 
-
 const apiKey = 'e6051476c5664333a9f172047242011';
 const form = document.querySelector('#form');
 const input = document.querySelector('#inputCity');
@@ -15,13 +14,13 @@ async function getWeather(city) {
 }
 
 function showCard({name, country, temp, condition, imgPath}) {
-    const htmlImg = imgPath ? `<img class="card-img" src="${imgPath}" alt=""></img>` : ''
+    const htmlImg = imgPath ? `<img class="card-img" src="${imgPath}" alt=""></img>` : '';
     const html = `<h2><span class="card-city">${name}</span><span class="card-country">${country}</span></h2>
         <div class="card-weather">
             <div class="card-value">${temp}<sup>°c</sup></div>
-            <div>${htmlImg}</div>
-            </div class="card-description">${condition}</div>
-        </div>`
+            ${htmlImg}
+        </div>
+        ${condition}`;
 
     card.innerHTML = html;
 }
@@ -31,11 +30,11 @@ async function checkImgSrc(url) {
         const img = new Image();
         
         img.onload = () => {
-            resolve(true);  // Изображение загружено успешно
+            resolve(true);  // изображение загружено успешно
         };
         
         img.onerror = () => {
-            resolve(false);  // Ошибка при загрузке изображения
+            resolve(false);  // ошибка при загрузке изображения
         };
         
         img.src = url;
@@ -55,7 +54,7 @@ form.onsubmit = async function (e) {
         card.innerText = error[data.error.code];
     } else {
 
-        const info = conditions.find((obj) => obj.code === data.current.condition.code)
+        const info = conditions.find((obj) => obj.code === data.current.condition.code);
         
         const filePath = './img/' + (data.current.is_day ? 'day' : 'night') + '/';
         const fileName = (data.current.is_day ? info.day : info.night) + '.png';
@@ -64,7 +63,7 @@ form.onsubmit = async function (e) {
 
         const remoteImgPath = data.current.condition.icon;
 
-        const imgPath = await checkImgSrc(localImgPath) ? localImgPath : (await checkImgSrc(remoteImgPath) ? remoteImgPath : '')
+        const imgPath = await checkImgSrc(localImgPath) ? localImgPath : (await checkImgSrc(remoteImgPath) ? remoteImgPath : '');
         const temp = Math.round(data.current.temp_c);
         const weatherData = {
             name: data.location.name,
