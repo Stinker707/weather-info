@@ -13,13 +13,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
     row-gap: 20px;
     padding: 40px 15px 50px;
     background: linear-gradient(92.7deg, #4cb8c4 0%, #3cd3ad 100%), #232323;
 }
 
-.title {
+.header__title {
     text-align: center;
     font-weight: 700;
     font-size: 44px;
@@ -28,15 +27,14 @@ body {
 }
 
 .form {
-    display: flex;
     max-width: 460px;
     width: 100%;
-    height: 54px;
+    display: flex;
     background: #fff;
     border-radius: 6px;
 }
 
-.input {
+.form__input {
     flex-grow: 1;
     font-weight: 300;
     font-size: 20px;
@@ -47,11 +45,11 @@ body {
     text-overflow: ellipsis;
 }
 
-.input:focus {
+.form__input:focus {
     outline-width: 0;
 }
 
-.btn {
+.form__btn {
     width: 145px;
     height: 54px;
     border-radius: 6px;
@@ -65,7 +63,7 @@ body {
     transition: background-color 0.2s ease-in;
 }
 
-.btn:hover {
+.form__btn:hover {
     background-color: #f01039;
 }
 
@@ -85,11 +83,11 @@ body {
     box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
 }
 
-.card.hidden {
+.card--hidden {
     opacity: 0;
 }
 
-.card-img {
+.card-content__img {
     width: 80px;
     object-fit: cover;
 }
@@ -108,20 +106,20 @@ body {
     box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
 }
 
-.card-weather {
+.card-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-h2 {
+.card-title {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 5px;
 }
 
-.card-city {
+.card-title__city {
     font-weight: 500;
     font-size: 28px;
     line-height: 1.18;
@@ -132,7 +130,7 @@ h2 {
     text-wrap: nowrap;
 }
 
-.card-country {
+.card-title__country {
     vertical-align: top;
     padding: 3px 5px;
 
@@ -149,12 +147,12 @@ h2 {
     border-radius: 6px;
 }
 
-.card-value {
+.card-content-value {
     font-size: 92px;
     line-height: 1;
     color: #000;
 }
 
-.card-value sup {
+.card-content-value__sup {
     font-size: 50%;
 }

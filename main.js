@@ -14,10 +14,10 @@ async function getWeather(city) {
 }
 
 function showCard({name, country, temp, condition, imgPath}) {
-    const htmlImg = imgPath ? `<img class="card-img" src="${imgPath}" alt=""></img>` : '';
-    const html = `<h2><span class="card-city">${name}</span><span class="card-country">${country}</span></h2>
-        <div class="card-weather">
-            <div class="card-value">${temp}<sup>°c</sup></div>
+    const htmlImg = imgPath ? `<img class="card-content__img" src="${imgPath}" alt=""></img>` : '';
+    const html = `<h2 class="card-title"><span class="card-title__city">${name}</span><span class="card-title__country">${country}</span></h2>
+        <div class="card-content">
+            <div class="card-content-value">${temp}<sup class="card-content-value__sup">°c</sup></div>
             ${htmlImg}
         </div>
         ${condition}`;
@@ -44,7 +44,7 @@ async function checkImgSrc(url) {
 form.onsubmit = async function (e) {
     e.preventDefault(); //отмена отправки формы
 
-    card.classList.add('hidden');
+    card.classList.add('card--hidden');
 
     const city = input.value.trim();  //trim обрезает пробелы и табы в конце и в начале
 
@@ -75,5 +75,5 @@ form.onsubmit = async function (e) {
 
         showCard(weatherData);
     }
-    card.classList.remove('hidden');
+    card.classList.remove('card--hidden');
 }
