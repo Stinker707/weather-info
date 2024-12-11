@@ -1,0 +1,20 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+
+    &,
+    &::after,
+    &::before {
+        box-sizing: border-box;
+    }
+}
+
+a {
+    &,
+    &:link,
+    &:visited,
+    &:hover {
+        text-decoration: none;
+    }
+}
